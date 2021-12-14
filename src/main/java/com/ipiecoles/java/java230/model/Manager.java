@@ -4,6 +4,7 @@ import com.ipiecoles.java.java230.exceptions.TechnicienException;
 import org.joda.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 @Entity
 public class Manager extends Employe {
 
-	@OneToMany(mappedBy = "manager")
+	@OneToMany(mappedBy = "manager", fetch = FetchType.EAGER)
 	private Set<Technicien> equipe = new HashSet<>();
 
 	public Manager(){

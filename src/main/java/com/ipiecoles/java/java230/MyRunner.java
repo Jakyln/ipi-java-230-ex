@@ -1,6 +1,10 @@
 package com.ipiecoles.java.java230;
 
 import com.ipiecoles.java.java230.model.Employe;
+import com.ipiecoles.java.java230.model.Manager;
+import com.ipiecoles.java.java230.model.Technicien;
+import com.ipiecoles.java.java230.repository.ManagerRepository;
+import com.ipiecoles.java.java230.repository.TechnicienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.domain.Page;
@@ -15,41 +19,24 @@ import java.util.List;
 public class MyRunner implements CommandLineRunner {
 
     @Autowired
-    private EmployeRepository EmployeRepository;
-
-
-    /*@Override
-    public void run(String... strings) throws Exception {
-
-        System.out.println(EmployeRepository.count());
-        Employe employe = EmployeRepository.findById(5L).get();
-        System.out.println(employe.toString());
-    }*/
+    private EmployeRepository employeRepository;
+    @Autowired
+    private TechnicienRepository technicienRepository;
+    @Autowired
+    private ManagerRepository managerRepository;
     @Override
-    public void run(String... strings)throws Exception{
-        /*List<Employe> employes = EmployeRepository.findByNomAndPrenom("Gaillard", "Victor");
-        for(Employe employe : employes){
-            System.out.println(employe.toString());
-        }*/
-
-        PageRequest pageRequest = PageRequest.of(0, 10, Sort.Direction.ASC, "matricule");
-        Page<Employe> employes = EmployeRepository.findByNomIgnoreCase("PiERre", pageRequest);
-        System.out.println(employes.getTotalElements());
-        System.out.println(employes.getTotalPages());
-        for(Employe employe : employes){
-            System.out.println(employe.toString());
-            //employe.getManager()
-
+    public void run(String... strings) throws Exception {
+        Technicien technicien = technicienRepository.findById(3L).get();
+        System.out.println(technicien.toString());
+        System.out.println(technicien.getManager().toString());
+        Manager manager = managerRepository.findById(5L).get();
+        System.out.println(manager.toString());
+        for(Technicien t : manager.getEquipe()){
+            System.out.println(t);
         }
-
     }
-    /*List<Employe> findByDateEmbaucheBefore(LocalDate dateEmbauche);
-    List<Employe> findByDateEmbaucheAfter(LocalDate dateEmbauche);*/
-
 
     public static void print(Object t) {
         System.out.println(t);
     }
-
-
 }

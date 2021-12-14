@@ -3,13 +3,11 @@ package com.ipiecoles.java.java230.model;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 @Entity
-public /*abstract*/ class Employe {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Employe {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +23,8 @@ public /*abstract*/ class Employe {
 	private LocalDate dateEmbauche;
 	
 	private Double salaire = Entreprise.SALAIRE_BASE;
-	
+
+
 	public Employe() {
 		
 	}
